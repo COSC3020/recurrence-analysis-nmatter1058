@@ -39,6 +39,11 @@ The Master theorem states:
     1. If f(n) = O($n^c$) where $c<log⁡_b(a)$, then $T(n)=Θ(log⁡b(a))$.
     2. If f(n) = Θ($n^clog⁡k(n)$) where $c=log⁡b(a)$, then $T(n)=Θ(n^clog⁡^(k+1)(n))$.
     3. If f(n) = Ω($n^c$) where c>log⁡b(a), and af(n/b)≤kf(n) for some k<1 and sufficiently large n, then         $T(n)=Θ(f(n))$.
-Comparing f(n)=O($n^5$) with $log⁡3(3)$, we have c=5 and $log⁡3(3)$=1.
+Comparing f(n)=O($n^5$) with $log⁡3(3)$, we have c=5 and $log⁡_3(3)$=1.
 Here, c>log⁡b(a)c>logb(a), so the third case of the Master theorem applies. Therefore, the tight bound for the runtime of the function is Θ($n^5$).
+
+We can test this without using Masters Theorem. So, we know the recurrence relation for the runtime of the mystery function is $T(n)=3T(n/3)+O(n^5)$. If we plug it into itself, we can see a trend and create an expression representing the runtime. The first time we get $9T(n/3/3)+3n^5/n^5+n^5$. Then we have $9(3T(n/9/3+n^5/9)^5+n^{12}/27+n^5$ which simplifies down to $27T(n/27)+n^{5}/3^9+n^5/3^3+n^5$. Notice the trend with similar values that change at the same time. With this in mind, we come up with:
+$$3^iT(n/3^i)+\left( \sum_{j=0}^{i-1}n^5/3^{3j} \right)$$ How often can we divide a number by 3 until we reach the base case? We can represent it as $log_3n$ which we can substitute for i. $3^{log_3n}=n$ so n+1 for the i expression. J is just a constant, but the i is replaced with $logn-1$, so were left with $n*1+n^5$. Thus, the tight big O bound is $Θ(n+n^5)$ or just $Θ(n^5)$ when we remove the constant. 
+
+Nicholas Matter, Assignment 1, 20 Sep 2022
 
